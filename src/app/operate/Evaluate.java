@@ -5,6 +5,7 @@ import app.operate.Calculate;
 public class Evaluate {
     private int operator_count = 0;
     private int character_count = 0;
+    private int unwanted_click_count = 0;
     private float previous_number;
     private float previous_result;
     private String eval_string;
@@ -23,6 +24,7 @@ public class Evaluate {
         this.operator_selected = false;
         this.character_count = 0;
         this.operator_count = 0;
+        this.unwanted_click_count =0;
         this.current_operator = "";
     }
 
@@ -50,7 +52,7 @@ public class Evaluate {
                 this.previous_result = result;
                 this.equal_repeater = true;
             
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 String first_character = Character.toString(this.eval_string.charAt(0));
 
                 if (eval_arr.length < 2){
@@ -75,8 +77,12 @@ public class Evaluate {
                 }
             }
         }
-        catch (StringIndexOutOfBoundsException e) {
-            new Warning("No Values Were Provided To Do Operations On");
+        catch (Exception e) {
+            this.unwanted_click_count += 1;
+            if (this.unwanted_click_count > 3) {
+                new Warning("No Values Were Provided To Do Operations On");
+                this.unwanted_click_count = 0;
+            }
         }
     }
 
