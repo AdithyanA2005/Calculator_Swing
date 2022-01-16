@@ -44,7 +44,7 @@ public class Calculator implements ActionListener{
         jf = new JFrame(title);
         jf.setLayout(null);
         jf.setSize(455, 639);
-        jf.setLocation(400, 130);
+        jf.setLocation(700, 200);
         jf.setResizable(false);
         jf.setBackground(rgb_blue);
 
