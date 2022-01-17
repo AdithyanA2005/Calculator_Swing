@@ -146,6 +146,11 @@ public class Evaluate {
             }  
         }
 
-        return this.eval_string_assemble(this.eval_string);
+        this.eval_string = this.eval_string_assemble(this.eval_string);
+        if (this.eval_string.endsWith(".0")) {
+            this.eval_string = this.eval_string.replace(".0", "");
+        }
+
+        return this.eval_string;
     }
 }
