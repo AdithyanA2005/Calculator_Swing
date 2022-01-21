@@ -3,7 +3,6 @@ package app;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.JTabbedPane;
-import javax.swing.BorderFactory;
 
 import java.awt.Insets;
 import java.awt.Dimension;
@@ -36,7 +35,6 @@ public class Calculator {
 
         // INITIALIZE TABBED PANE
         JTabbedPane tabbedPane=new JTabbedPane();
-        tabbedPane.setBorder(BorderFactory.createEmptyBorder());
         tabbedPane.setLocation(0, -21);
 
         // ADDING ARITHMETICAL PANEL

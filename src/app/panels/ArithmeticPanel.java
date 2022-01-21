@@ -5,7 +5,6 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import javax.swing.JTabbedPane;
-import javax.swing.BorderFactory;
 import javax.swing.SwingConstants;
 
 import java.awt.Image;
@@ -26,7 +25,6 @@ public class ArithmeticPanel extends JPanel {
     public ArithmeticPanel(JTabbedPane tabbedPane) {
         // INITIALIZE ARITHEMETICAL PANEL
         setLayout(new GridLayout(6, 1));
-        setBorder(BorderFactory.createEmptyBorder());
 
         // INPUT SCREEN
         JLabel inputScreen=new JLabel("", JLabel.CENTER);
