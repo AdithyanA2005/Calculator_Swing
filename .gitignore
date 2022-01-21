@@ -1,5 +1,2 @@
-src/app/operate/Calculate.class
-src/app/operate/Evaluate.class
-src/app/popup/Warning.class
-src/app/Calculator.class
-src/Main.class
+*.class
+*logs.txt
