@@ -1,10 +1,10 @@
 package app.panels;
-
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JTabbedPane;
+// import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 
 import java.awt.Image;
@@ -21,38 +21,28 @@ public class ArithmeticPanel extends JPanel {
     String inputString = "";
     Evaluate evaluate=new Evaluate();
 
-    // #NOTE: We are going to keep everthing in arithmeticPanel as a row including inputScreen
-    public ArithmeticPanel(JTabbedPane tabbedPane) {
+    // #NOTE: We are going to keep everthing in arithmeticPanel as a row(3) including inputScreen 
+    public ArithmeticPanel(JFrame frame) {
         // INITIALIZE ARITHEMETICAL PANEL
-        setLayout(new GridLayout(6, 1));
+        setLayout(new GridLayout(3, 1));
 
-        // INPUT SCREEN
+
+        // MAIN CONTAINER - 1
+        JPanel mainContainer1=new JPanel();
+        mainContainer1.setLayout(new GridLayout(2, 1));
+        // Input Screen
         JLabel inputScreen=new JLabel("", JLabel.CENTER);
         inputScreen.setBackground(Constants.rgb_blue);
         inputScreen.setForeground(Constants.rgb_white);
         inputScreen.setOpaque(true);
         inputScreen.setHorizontalAlignment(SwingConstants.CENTER);
         inputScreen.setFont(Constants.title_font);
-        add(inputScreen, BorderLayout.NORTH);
+        mainContainer1.add(inputScreen);
 
-        // BUTTONS :-
+        // Buttons Row - 1
         JPanel btn_row1=new JPanel();
         btn_row1.setLayout(new GridLayout(1, 4));
-
-        ImageIcon home_icon = new ImageIcon(new ImageIcon("./../lib/home_icon.png").getImage().getScaledInstance(40, 35, Image.SCALE_DEFAULT));
-        JButton homeButton=new JButton(home_icon);
-        homeButton.setFont(Constants.main_font);
-        homeButton.setBackground(Constants.rgb_grey);
-        homeButton.setForeground(Constants.rgb_blue);
-        homeButton.setRolloverEnabled(true);
-        homeButton.setFocusable(false);
-        homeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                tabbedPane.setSelectedIndex(1);
-			}
-		});
-        btn_row1.add(homeButton);
-
+        // Button-plus 
         JButton plusButton=new JButton("+");
         plusButton.setFont(Constants.main_font);
         plusButton.setBackground(Constants.rgb_grey);
@@ -66,7 +56,7 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row1.add(plusButton);
-
+        // Button-minus 
         JButton minusButton=new JButton("-");
         minusButton.setFont(Constants.main_font);
         minusButton.setBackground(Constants.rgb_grey);
@@ -80,7 +70,7 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row1.add(minusButton);
-
+        // Button-multiply 
         JButton multiButton=new JButton("*");
         multiButton.setFont(Constants.main_font);
         multiButton.setBackground(Constants.rgb_grey);
@@ -94,16 +84,30 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row1.add(multiButton);
+        // Button-div
+        JButton divButton=new JButton("/");
+        divButton.setFont(Constants.main_font);
+        divButton.setBackground(Constants.rgb_grey);
+        divButton.setForeground(Constants.rgb_blue);
+        divButton.setRolloverEnabled(true);
+        divButton.setFocusable(false);
+        divButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                inputString = evaluate.evaluate("d", inputString);
+                inputScreen.setText(inputString);
+			}
+		});
+        btn_row1.add(divButton);
+        mainContainer1.add(btn_row1);
+        add(mainContainer1);
 
-        add(btn_row1);
 
-
-
-
-
+        // MAIN CONTAINER - 2 
+        JPanel mainContainer2=new JPanel();
+        mainContainer2.setLayout(new GridLayout(2, 1));
         JPanel btn_row2=new JPanel();
         btn_row2.setLayout(new GridLayout(1, 4));
-        
+        // Button-seven 
         JButton sevenButton=new JButton("7");
         sevenButton.setFont(Constants.main_font);
         sevenButton.setBackground(Constants.rgb_white);
@@ -117,7 +121,7 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row2.add(sevenButton);
-
+        // Button-eight 
         JButton eightButton=new JButton("8");
         eightButton.setFont(Constants.main_font);
         eightButton.setBackground(Constants.rgb_white);
@@ -131,7 +135,7 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row2.add(eightButton);
-
+        // Button-nine 
         JButton nineButton=new JButton("9");
         nineButton.setFont(Constants.main_font);
         nineButton.setBackground(Constants.rgb_white);
@@ -145,29 +149,25 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row2.add(nineButton);
-
-        JButton divButton=new JButton("/");
-        divButton.setFont(Constants.main_font);
-        divButton.setBackground(Constants.rgb_grey);
-        divButton.setForeground(Constants.rgb_blue);
-        divButton.setRolloverEnabled(true);
-        divButton.setFocusable(false);
-        divButton.addActionListener(new ActionListener() {
+        // Button-raiseto
+        JButton raiseToButton=new JButton("^");
+        raiseToButton.setFont(Constants.main_font);
+        raiseToButton.setBackground(Constants.rgb_grey);
+        raiseToButton.setForeground(Constants.rgb_blue);
+        raiseToButton.setRolloverEnabled(true);
+        raiseToButton.setFocusable(false);
+        raiseToButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                inputString = evaluate.evaluate("d", inputString);
+                inputString = evaluate.evaluate("r", inputString);
                 inputScreen.setText(inputString);
 			}
 		});
-        btn_row2.add(divButton);
-        add(btn_row2);
-
-
-
-
-
+        btn_row2.add(raiseToButton);
+        mainContainer2.add(btn_row2);
+        
         JPanel btn_row3=new JPanel();
         btn_row3.setLayout(new GridLayout(1, 4));
-
+        // Button-four 
         JButton fourButton=new JButton("4");
         fourButton.setFont(Constants.main_font);
         fourButton.setBackground(Constants.rgb_white);
@@ -181,7 +181,7 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row3.add(fourButton);
-        
+        // Button-five 
         JButton fiveButton=new JButton("5");
         fiveButton.setFont(Constants.main_font);
         fiveButton.setBackground(Constants.rgb_white);
@@ -195,7 +195,7 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row3.add(fiveButton);
-        
+        // Button-six 
         JButton sixButton=new JButton("6");
         sixButton.setFont(Constants.main_font);
         sixButton.setBackground(Constants.rgb_white);
@@ -209,72 +209,7 @@ public class ArithmeticPanel extends JPanel {
 			}
 		});
         btn_row3.add(sixButton);
-        
-        JButton raiseToButton=new JButton("^");
-        raiseToButton.setFont(Constants.main_font);
-        raiseToButton.setBackground(Constants.rgb_grey);
-        raiseToButton.setForeground(Constants.rgb_blue);
-        raiseToButton.setRolloverEnabled(true);
-        raiseToButton.setFocusable(false);
-        raiseToButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                inputString = evaluate.evaluate("r", inputString);
-                inputScreen.setText(inputString);
-			}
-		});
-        btn_row3.add(raiseToButton);
-
-        add(btn_row3);
-
-
-
-
-
-        JPanel btn_row4=new JPanel();
-        btn_row4.setLayout(new GridLayout(1, 4));
-
-        JButton oneButton=new JButton("1");
-        oneButton.setFont(Constants.main_font);
-        oneButton.setBackground(Constants.rgb_white);
-        oneButton.setForeground(Constants.rgb_blue);
-        oneButton.setRolloverEnabled(true);
-        oneButton.setFocusable(false);
-        oneButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                inputString = evaluate.evaluate("1", inputString);
-                inputScreen.setText(inputString);
-			}
-		});
-        btn_row4.add(oneButton);
-                
-        JButton twoButton=new JButton("2");
-        twoButton.setFont(Constants.main_font);
-        twoButton.setBackground(Constants.rgb_white);
-        twoButton.setForeground(Constants.rgb_blue);
-        twoButton.setRolloverEnabled(true);
-        twoButton.setFocusable(false);
-        twoButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                inputString = evaluate.evaluate("2", inputString);
-                inputScreen.setText(inputString);
-			}
-		});
-        btn_row4.add(twoButton);
-        
-        JButton threeButton=new JButton("3");
-        threeButton.setFont(Constants.main_font);
-        threeButton.setBackground(Constants.rgb_white);
-        threeButton.setForeground(Constants.rgb_blue);
-        threeButton.setRolloverEnabled(true);
-        threeButton.setFocusable(false);
-        threeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                inputString = evaluate.evaluate("3", inputString);
-                inputScreen.setText(inputString);
-			}
-		});
-        btn_row4.add(threeButton);
-
+        // Button-percent 
         JButton percentButton=new JButton("%");
         percentButton.setFont(Constants.main_font);
         percentButton.setBackground(Constants.rgb_grey);
@@ -287,17 +222,30 @@ public class ArithmeticPanel extends JPanel {
                 inputScreen.setText(inputString);
 			}
 		});
-        btn_row4.add(percentButton);
-
-        add(btn_row4);
-
-
-
-
-
-        JPanel btn_row5=new JPanel();
-        btn_row5.setLayout(new GridLayout(1, 4));
-
+        btn_row3.add(percentButton);
+        mainContainer2.add(btn_row3);
+        add(mainContainer2);
+        
+        // MAIN CONTAINER - 3
+        JPanel mainContainer3=new JPanel();
+        mainContainer3.setLayout(new GridLayout(1, 4));
+        JPanel btnColumn1=new JPanel();
+        btnColumn1.setLayout(new GridLayout(2, 1));
+        // Button-one 
+        JButton oneButton=new JButton("1");
+        oneButton.setFont(Constants.main_font);
+        oneButton.setBackground(Constants.rgb_white);
+        oneButton.setForeground(Constants.rgb_blue);
+        oneButton.setRolloverEnabled(true);
+        oneButton.setFocusable(false);
+        oneButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                inputString = evaluate.evaluate("1", inputString);
+                inputScreen.setText(inputString);
+			}
+		});
+        btnColumn1.add(oneButton);
+        // Button-clear 
         JButton clearButton=new JButton("C");
         clearButton.setFont(Constants.main_font);
         clearButton.setBackground(Constants.rgb_white);
@@ -310,8 +258,26 @@ public class ArithmeticPanel extends JPanel {
                 inputScreen.setText(inputString);
 			}
 		});
-        btn_row5.add(clearButton);
+        btnColumn1.add(clearButton);
+        mainContainer3.add(btnColumn1);
 
+        JPanel btnColumn2=new JPanel();
+        btnColumn2.setLayout(new GridLayout(2, 1));
+        // Button-two 
+        JButton twoButton=new JButton("2");
+        twoButton.setFont(Constants.main_font);
+        twoButton.setBackground(Constants.rgb_white);
+        twoButton.setForeground(Constants.rgb_blue);
+        twoButton.setRolloverEnabled(true);
+        twoButton.setFocusable(false);
+        twoButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                inputString = evaluate.evaluate("2", inputString);
+                inputScreen.setText(inputString);
+			}
+		});
+        btnColumn2.add(twoButton);
+        // Button-zero 
         JButton zeroButton=new JButton("0");
         zeroButton.setFont(Constants.main_font);
         zeroButton.setBackground(Constants.rgb_white);
@@ -324,8 +290,26 @@ public class ArithmeticPanel extends JPanel {
                 inputScreen.setText(inputString);
 			}
 		});
-        btn_row5.add(zeroButton);
+        btnColumn2.add(zeroButton);
+        mainContainer3.add(btnColumn2);
 
+        JPanel btnColumn3=new JPanel();
+        btnColumn3.setLayout(new GridLayout(2, 1));
+        // Button-three 
+        JButton threeButton=new JButton("3");
+        threeButton.setFont(Constants.main_font);
+        threeButton.setBackground(Constants.rgb_white);
+        threeButton.setForeground(Constants.rgb_blue);
+        threeButton.setRolloverEnabled(true);
+        threeButton.setFocusable(false);
+        threeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                inputString = evaluate.evaluate("3", inputString);
+                inputScreen.setText(inputString);
+			}
+		});
+        btnColumn3.add(threeButton);
+        // Button-dot 
         JButton dotButton=new JButton(".");
         dotButton.setFont(Constants.main_font);
         dotButton.setBackground(Constants.rgb_white);
@@ -338,8 +322,12 @@ public class ArithmeticPanel extends JPanel {
                 inputScreen.setText(inputString);
 			}
 		});
-        btn_row5.add(dotButton);
-  
+        btnColumn3.add(dotButton);
+        mainContainer3.add(btnColumn3);
+
+        JPanel btnColumn4=new JPanel();
+        btnColumn4.setLayout(new GridLayout(1, 1));
+        // Button-equals 
         JButton equalButton=new JButton("=");
         equalButton.setFont(Constants.main_font);
         equalButton.setBackground(Constants.rgb_orange);
@@ -352,8 +340,29 @@ public class ArithmeticPanel extends JPanel {
                 inputScreen.setText(inputString);
 			}
 		});
-        btn_row5.add(equalButton);
-
-        add(btn_row5);
+        btnColumn4.add(equalButton);
+        mainContainer3.add(btnColumn4);
+        add(mainContainer3);
     }
 }
+
+
+
+
+
+
+        // Button-home
+        // ImageIcon home_icon = new ImageIcon(new ImageIcon("./../lib/home_icon.png").getImage().getScaledInstance(40, 35, Image.SCALE_DEFAULT));
+        // JButton homeButton=new JButton(home_icon);
+        // homeButton.setFont(Constants.main_font);
+        // homeButton.setBackground(Constants.rgb_grey);
+        // homeButton.setForeground(Constants.rgb_blue);
+        // homeButton.setRolloverEnabled(true);
+        // homeButton.setFocusable(false);
+        // homeButton.addActionListener(new ActionListener() {
+		// 	public void actionPerformed(ActionEvent e) {
+        //         // tabbedPane.setSelectedIndex(1);
+
+		// 	}
+		// });
+        // btn_row1.add(homeButton);
