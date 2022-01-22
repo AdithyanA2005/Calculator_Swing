@@ -1,113 +1,95 @@
 package app.panels;
+
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JTabbedPane;
-import javax.swing.*;
-// import javax.swing.ImageIcon.*;
-import java.awt.*;
+import javax.swing.border.LineBorder;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.*;
+import app.theme.Constants;
 
-// import javax.swing.JPanel;
-// import javax.swing.BoxLayout;
-// import java.awt.GridLayout;
-// import javax.swing.JButton;
-// import java.awt.FlowLayout;
-// import java.awt.event.ActionListener;
-// import java.awt.event.ActionEvent;
-// import java.awt.CardLayout;
-// import javax.swing.SpringLayout;
-// import java.awt.GridBagLayout;
-// import java.awt.GridBagConstraints;
-// import java.awt.Insets;
-// import com.jgoodies.forms.layout.FormLayout;
-// import com.jgoodies.forms.layout.ColumnSpec;
-// import com.jgoodies.forms.layout.RowSpec;
-// import com.jgoodies.forms.layout.FormSpecs;
-// import net.miginfocom.swing.MigLayout;
-// import javax.swing.GroupLayout;
-// import javax.swing.GroupLayout.Alignment;
-// import java.awt.BorderLayout;
-// import javax.swing.JPopupMenu;
-// import java.awt.Component;
-// import java.awt.event.MouseAdapter;
-// import java.awt.event.MouseEvent;
-// import javax.swing.JMenuItem;
-// import javax.swing.JSpinner;
-// import javax.swing.JProgressBar;
-// import javax.swing.JLabel;
-// import javax.swing.JToolBar;
-// import javax.swing.JMenu;
-// import javax.swing.JDesktopPane;
-// import javax.swing.JTextArea;
-// import javax.swing.JComboBox;
-// import javax.swing.JInternalFrame;
-// import javax.swing.JMenuBar;
-// import java.awt.Color;
-// import javax.swing.border.LineBorder;
-// import javax.swing.SwingConstants;
-// import java.awt.Font;
-// import java.awt.Panel;
-// import javax.swing.JSeparator;
-// import javax.swing.JLayeredPane;
-// import javax.swing.JScrollPane;
-// import javax.swing.Box;
-// import java.awt.Button;
 
 public class HomePanel extends JPanel {
 	public HomePanel(JTabbedPane tabbedPane) {
-		// INITIALIZE HOME PANNEL 
-		setLayout(new BorderLayout(0, 30));
-        setBorder(BorderFactory.createEmptyBorder());
+		Color rgb_background = Constants.rgb_grey;
+		Color rgb_btn_background = Constants.rgb_white;
+		Color rgb_btn_foreground = Constants.rgb_blue;
 		
-		// INTIALIZING HOME PANNEL NAVBAR 
+		// INITIALIZE HOME PANNEL
+		setLayout(new BorderLayout(0, 0));
+				
+		// INITIALIZE TITLE BAR 
 		JPanel topBar = new JPanel();
-		topBar.setBackground(Color.RED);
-		add(topBar, BorderLayout.NORTH);
-		
+		topBar.setBackground(Constants.rgb_blue);
 		JLabel topBarText = new JLabel("ADCALATOR");
-		topBarText.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		topBarText.setForeground(Constants.rgb_white);
+		topBarText.setFont(Constants.title_font);
 		topBar.add(topBarText);
+		add(topBar, BorderLayout.NORTH);
+
+		// INITIALIZE HOME CONTAINER 
+		JPanel homeContainer = new JPanel();
+		add(homeContainer, BorderLayout.CENTER);
+		homeContainer.setLayout(new GridLayout(3, 1, 0, -55));
 		
 
-		// INITIALIZE CARDS 
-		JPanel cardsPanel = new JPanel();
-		add(cardsPanel, BorderLayout.CENTER);
-		cardsPanel.setLayout(new GridLayout(4, 3, 0, 30));
-		
-		Component spacer1 = Box.createHorizontalStrut(20);
-		cardsPanel.add(spacer1);
-		
-		JButton arithmeticBtn = new JButton("Arithemetic");
+		// ROW-1
+		JPanel arithmetic_row = new JPanel();
+		arithmetic_row.setBorder(new LineBorder(rgb_background, 55));
+		arithmetic_row.setLayout(new GridLayout(0, 1, 0, 0));
+		JButton arithmeticBtn = new JButton("Arithmetic");
+		arithmeticBtn.setRolloverEnabled(false);
+        arithmeticBtn.setFocusable(false);
+		arithmeticBtn.setBackground(rgb_btn_background);
+		arithmeticBtn.setForeground(rgb_btn_foreground);
+		arithmeticBtn.setFont(Constants.main_font);
 		arithmeticBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.setSelectedIndex(0);
 			}
 		});
-		cardsPanel.add(arithmeticBtn);
-		
-		Component spacer2 = Box.createHorizontalStrut(20);
-		cardsPanel.add(spacer2);
-		
-		Component spacer3 = Box.createHorizontalStrut(20);
-		cardsPanel.add(spacer3);
-		
-		JButton conversionBtn = new JButton("Conversions");
-		cardsPanel.add(conversionBtn);
-		
-		Component spacer4 = Box.createHorizontalStrut(20);
-		cardsPanel.add(spacer4);
-		
-		Component spacer5 = Box.createHorizontalStrut(20);
-		cardsPanel.add(spacer5);
-		
-		JButton Trignometry = new JButton("Trignometry");
-		cardsPanel.add(Trignometry);
-		
-		Component spacer6 = Box.createHorizontalStrut(20);
-		cardsPanel.add(spacer6);
-		
-		Component spacer7 = Box.createVerticalStrut(20);
-		cardsPanel.add(spacer7);
+		arithmetic_row.add(arithmeticBtn);
+		homeContainer.add(arithmetic_row);
 
+		// ROW-2
+		JPanel conversionRow = new JPanel();
+		conversionRow.setBorder(new LineBorder(rgb_background, 55));
+		conversionRow.setLayout(new GridLayout(0, 1, 0, 0));
+		JButton conversionBtn = new JButton("Conversion");
+		conversionBtn.setRolloverEnabled(false);
+        conversionBtn.setFocusable(false);
+		conversionBtn.setBackground(rgb_btn_background);
+		conversionBtn.setForeground(rgb_btn_foreground);
+		conversionBtn.setFont(Constants.main_font);
+		conversionBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(2);
+			}
+		});
+		conversionRow.add(conversionBtn);
+		homeContainer.add(conversionRow);
+		
+		// ROW-3
+		JPanel trignometryRow = new JPanel();
+		trignometryRow.setBorder(new LineBorder(rgb_background, 55));
+		trignometryRow.setLayout(new GridLayout(0, 1, 0, 0));
+		JButton trignometryBtn = new JButton("Trignometry");
+		trignometryBtn.setRolloverEnabled(false);
+        trignometryBtn.setFocusable(false);
+		trignometryBtn.setBackground(rgb_btn_background);
+		trignometryBtn.setForeground(rgb_btn_foreground);
+		trignometryBtn.setFont(Constants.main_font);
+		trignometryBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.setSelectedIndex(3);
+			}
+		});
+		trignometryRow.add(trignometryBtn);
+		homeContainer.add(trignometryRow);
 	}
 }
