@@ -1,2 +1,4 @@
 *.class
 *logs.txt
+.idea
+.vscode
